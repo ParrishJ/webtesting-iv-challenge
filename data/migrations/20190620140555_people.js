@@ -9,6 +9,7 @@ exports.up = function (knex, Promise) {
 
         tbl
             .string('job', 200)
+            .notNullable()
 
     })
 
