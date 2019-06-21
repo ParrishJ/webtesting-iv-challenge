@@ -39,4 +39,15 @@ server.post('/people', (req, res) => {
         })
 });
 
+server.delete('/people/:id', (req, res) => {
+    const { id } = req.params;
+    People.remove(id)
+        .then(response => {
+            res.status(200).json({ message: "entry deleted" })
+        })
+        .catch(error => {
+            res.status(500).json({ error: "could not delete" })
+        });
+});
+
 module.exports = server;

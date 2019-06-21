@@ -2,7 +2,8 @@ const db = require('../data/dbConfig');
 
 module.exports = {
     add,
-    getPeople
+    getPeople,
+    remove
 };
 
 function add(person) {
@@ -13,5 +14,11 @@ function add(person) {
 
 function getPeople() {
     return db('peopleTable')
+}
+
+function remove(id) {
+    return db('peopleTable')
+        .where('id', id)
+        .del()
 }
 
