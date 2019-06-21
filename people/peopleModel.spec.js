@@ -62,5 +62,12 @@ describe('people model', () => {
             expect(people).toHaveLength(0)
         })
 
+        it('should give 500 when remove given wrong index', async () => {
+            await add({ name: 'Billl', job: 'farmer' });
+            await remove(2);
+
+            expect(500)
+        })
+
     })
 })
