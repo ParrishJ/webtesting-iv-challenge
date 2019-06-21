@@ -28,7 +28,11 @@ server.get('/people', (req, res) => {
 server.post('/people', (req, res) => {
     People.add(req.body)
         .then(ids => {
-            res.status(200).json(ids)
+            if (req.body.job) {
+                res.status(200).json(ids)
+            } else
+                res.status(404).json({ error: "required field missing" })
+
         })
         .catch(error => {
             res.status(500).json(error)
