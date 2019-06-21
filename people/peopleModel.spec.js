@@ -2,7 +2,7 @@ const db = require('../data/dbConfig.js');
 const supertest = require('supertest');
 const server = require('../api/server')
 
-const { add, getPeople } = require('./peopleModel.js');
+const { add, getPeople, remove } = require('./peopleModel.js');
 
 describe('people model', () => {
     beforeEach(async () => {
@@ -50,5 +50,17 @@ describe('people model', () => {
                 .get('/people')
                 .expect('Content-Type', /json/i)
         })
+    })
+
+    describe('remove()', () => {
+        it('should remove an entry', async () => {
+            await add({ name: 'Billl', job: 'farmer' });
+            await remove(1);
+
+            const people = await db('peopleTable')
+
+            expect(people).toHaveLength(0)
+        })
+
     })
 })
